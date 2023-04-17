@@ -7,7 +7,8 @@ const WeatherSummary = ({ weatherData }) => {
       <img
         className={styles.weatherIcon}
         alt={weatherData.description}
-        src={`${process.env.PUBLIC_URL}/images/weather-icons/${weatherData.icon}.png`}
+        src={`${process.env.
+          PUBLIC_URL}/images/weather-icons/${weatherData.icon}.png`}
       />
       <div className={styles.weatherInfo}>
         <h2>{weatherData.name}</h2>
