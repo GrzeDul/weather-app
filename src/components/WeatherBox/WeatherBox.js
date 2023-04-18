@@ -19,15 +19,16 @@ const WeatherBox = (props) => {
         if (res.status >= 400 && res.status < 600) {
           throw new Error();
         }
-        return res.json().then((data) => {
-          setWeatherData({
-            city: data.name,
-            temp: data.main.temp,
-            icon: data.weather[0].icon,
-            description: data.weather[0].main,
-          });
-          setPending(false);
+        return res.json();
+      })
+      .then((data) => {
+        setWeatherData({
+          city: data.name,
+          temp: data.main.temp,
+          icon: data.weather[0].icon,
+          description: data.weather[0].main,
         });
+        setPending(false);
       })
       .catch(() => {
         setFetchError(true);
