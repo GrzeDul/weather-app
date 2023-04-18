@@ -15,21 +15,19 @@ const WeatherBox = (props) => {
       `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${'6ae210aa95990981e4876e0614403946'}&units=metric`
     )
       .then((res) => {
-        if (res.status === 200) {
-          return res.json().then((data) => {
-            setWeatherData({
-              city: data.name,
-              temp: data.main.temp,
-              icon: data.weather[0].icon,
-              description: data.weather[0].main,
-            });
-            setPending(false);
-          });
-        } else {
-          setFetchError(true);
-          setPending(false);
-          setWeatherData(null);
+        // throw error on 400s and 500s status codes
+        if (res.status >= 400 && res.status < 600) {
+          throw new Error();
         }
+        return res.json().then((data) => {
+          setWeatherData({
+            city: data.name,
+            temp: data.main.temp,
+            icon: data.weather[0].icon,
+            description: data.weather[0].main,
+          });
+          setPending(false);
+        });
       })
       .catch(() => {
         setFetchError(true);
