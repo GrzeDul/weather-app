@@ -16,7 +16,7 @@ const WeatherBox = (props) => {
     )
       .then((res) => {
         // throw error on 400s and 500s status codes
-        if (res.status >= 400 && res.status < 600) {
+        if (res.status === 400 || res.status === 404 || res.status === 500) {
           throw new Error();
         }
         return res.json();
